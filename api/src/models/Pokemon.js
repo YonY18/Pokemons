@@ -4,36 +4,49 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('pokemon', {
-    id: {
-      type: DataTypes.UUID,           //para que me genere un Id unico(Una columna que almacena un identificador universal único. Úselo con UUIDV1 o UUIDV4 para valores predeterminados.)
-      defaultValue: DataTypes.UUIDV4,  //Un identificador universal único por defecto generado según la norma UUID v4
+    
+    id:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
-      primaryKey: true,
+      primaryKey: true
+    },
+    img:{
+      type: DataTypes.STRING,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
-    life: {           
+    hp:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    attack: {               
+    attack:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    defense: {
+    defense:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    speed: {
+    speed:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    height: {
+    height:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    weight: {
+    weight:{
       type: DataTypes.INTEGER,
+      allowNull: false
     },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
+    }
     
   });
 };
-
