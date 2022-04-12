@@ -141,8 +141,8 @@ router.post('/pokemons', async (req,res) => {
         weight,
         createdInDb,
     });
-    let typeDb = await Type.findAll({
-        where: { name : name } 
+    let typeDb = await Type.findAll({   //REVISAR!!!!
+        where: { name : type } 
     });
     pokemonCreated.addType(typeDb)
     res.send('Personaje Creado Correctamente')
