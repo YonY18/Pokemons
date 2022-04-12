@@ -73,6 +73,18 @@ const getTypesApi = async () =>{
         return typesArray
 }
 
+/*let pokety = await Pokemon.findAll();
+let filtroType = await pokety.filter(e=> e.name === name);
+let idTyp = filtroType.id;
+
+let pokemonId = name;
+let typeId= idTyp;
+
+await pokemontype.create({
+   pokemonId,
+   typeId,
+})*/
+
 /********************************* Pokemon GET POST ********************************/
 router.get('/pokemons', async (req,res) =>{
     const {name} = req.query; 
@@ -118,8 +130,7 @@ router.post('/pokemons', async (req,res) => {
         weight,
         createdInDb,
         type,
-    } = req.body
-
+    } = req.body;
     let pokemonCreated = await Pokemon.create({
         name,
         hp,
@@ -129,10 +140,10 @@ router.post('/pokemons', async (req,res) => {
         height,
         weight,
         createdInDb,
-    })
+    });
     let typeDb = await Type.findAll({
-        where: { name : type } 
-    })
+        where: { name : name } 
+    });
     pokemonCreated.addType(typeDb)
     res.send('Personaje Creado Correctamente')
 })
