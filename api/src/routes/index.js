@@ -45,6 +45,10 @@ const getDbInfo = async () =>{
  return dbPokemons
 };
 
+const getTypeInfo = async () =>{
+    return await Type.findAll()
+}
+
 const getAllPokemons = async () =>{
     /*const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
@@ -135,7 +139,7 @@ router.post('/pokemons', async (req,res) => {
 
 /********************************* Type GET ********************************/
 router.get('/type', async (req,res) =>{
-    let base = await getTypesApi();
+    let base = await getTypeInfo();
     if(base.length === 0){
         base = await getTypesApi();
       console.log (base)
