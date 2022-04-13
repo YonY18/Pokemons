@@ -6,13 +6,12 @@ const { Pokemon, Type } = require ('../db.js');
 const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
-const getApiInfo = async()=>{
+/*Viejo get a la api pokemon, anda pero rompe al tardar mucho accediendo... T_T*/
+/*const getApiInfo = async()=>{
     const firstApiPage = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=5');
     const secondApiPage = await axios.get(firstApiPage.data.next);     
     const allPokemons = firstApiPage.data.results.concat(secondApiPage.data.results);
-        
-    const PokemonProps = await Promise.all(
+        const PokemonProps = await Promise.all(
         allPokemons.map(async ele=>{
             const pokemon = await axios.get(ele.url);
             return{
@@ -26,12 +25,33 @@ const getApiInfo = async()=>{
                 weight: `${pokemon.data.weight / 10} kg`,
                 type: pokemon.data.types && pokemon.data.types.map((t)=> t.type.name),
                 img: pokemon.data.sprites.other.home.front_default       
-
             }
-        }) 
-    ) 
-    return PokemonProps;
+        }),),return PokemonProps;
+};*/
+/* Nuevo Get a la Api renovado y sexy */
+const getApiInfo = async () => {
+    const apiUrl = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40");
+    const results = apiUrl.data.results
+
+    const pokemonInfo = []
+    
+    for(let i = 0 ; i < results.length ; i++){
+      const pokes = await axios.get(results[i].url);
+      const pokeInfo = pokes.data;
+
+      pokemonInfo.push({
+        id: pokeInfo.id,
+        name: pokeInfo.name,
+        types: pokeInfo.types.map((t) => t.type.name),
+        img: pokeInfo.sprites.other['official-artwork'].front_default,
+        attack: pokeInfo.stats[1].base_stat,
+        weight: pokeInfo.weight,
+        height: pokeInfo.height
+      });
+    }
+    return pokemonInfo;
 };
+
 const getDbInfo = async () =>{
     const dbPokemons = await Pokemon.findAll({
         include:{
@@ -150,7 +170,7 @@ router.post('/pokemons', async (req,res) => {
 })
 
 /********************************* Type GET ********************************/
-router.get('/type', async (req,res) =>{
+router.get('/types', async (req,res) =>{
     let base = await getTypeInfo();
     if(base.length === 0){
         base = await getTypesApi();
