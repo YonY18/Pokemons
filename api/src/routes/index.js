@@ -108,7 +108,7 @@ router.get('/pokemons/:id', async (req, res) => {
     const {id} = req.params;
     const totalPokemons = await getAllPokemons();
     if(id){
-        const pokemonId = await totalPokemons.filter(pokeId => pokeId.id == id);
+        const pokemonId = await totalPokemons.filter(el => el.id == id);
         if(pokemonId.length){
             try{
                 return res.status(200).send(pokemonId)
@@ -141,9 +141,10 @@ router.post('/pokemons', async (req,res) => {
         weight,
         createdInDb,
     });
-    let typeDb = await Type.findAll({   //REVISAR!!!!
+    let typeDb = await Type.findAll({   
         where: { name : type } 
     });
+    console.log(typeDb)
     pokemonCreated.addType(typeDb)
     res.send('Personaje Creado Correctamente')
 })
