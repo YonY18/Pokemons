@@ -1,17 +1,26 @@
 import React from "react";
+import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getPokemons, getTypes, reloadPokemons } from '../../actions';
+import { getPokemons, getTypes} from '../../actions';
 import {Link} from 'react-router-dom'
 import Card from '../Card/Card';
-
+import Paginado from '../Paginado'
 
 export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
+    const Types = useSelector ((state)=> state.types)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
+    const indixOfLastPokemon = currentPage * pokemonsPerPage
+    const indexOfFirstPokemon = indixOfLastPokemon - pokemonsPerPage
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon,indixOfLastPokemon)
 
-
-
+    const paginado = (pageNumber) =>{
+        setCurrentPage(pageNumber)
+    }
+    
 
     useEffect(()=>{
         dispatch(getPokemons())
@@ -24,7 +33,6 @@ export default function Home (){
         e.preventDefault();
         dispatch(getPokemons());
     }
-
 
 
     return(
@@ -51,14 +59,21 @@ export default function Home (){
                     <option value="All">all types</option>
                 </select>
             </div>
+
+            <Paginado
+                pokemonsPerPage = {pokemonsPerPage}
+                allPokemons = {allPokemons.length}
+                paginado = {paginado}
+            />
             <div>
-            {allPokemons.map( el => {
-                    return(
-                        <div>
-                            <Link to={"/home/" + el.id}>
-                                <Card name={el.name} types={el.types} image={el.img} weight={el.weight} height={el.height} />
-                            </Link>
-                        </div>
+
+            {currentPokemons?.map((el) =>{
+                return(
+                    <Fragment key={el.id}>
+                        <Link to={"/home/" + el.name}>
+                            <Card name={el.name} types={el.types} image={el.img} weight={el.weight} height={el.height} />
+                        </Link>
+                    </Fragment>
                     )
                 }) 
             }
