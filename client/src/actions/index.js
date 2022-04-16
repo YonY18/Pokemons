@@ -31,3 +31,11 @@ export function filterPokemonsByType(payload){
         payload
     }
 }
+
+export function orderByNameOrStrengh(payload){
+    
+    return {
+        type:"ORDER_BY_NAME_OR_STRENGH",
+        payload
+    }
+}

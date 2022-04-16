@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getPokemons, getTypes, filterPokemonsByType} from '../../actions';
+import { getPokemons, getTypes, orderByNameOrStrengh, filterPokemonsByType} from '../../actions';
 import {Link} from 'react-router-dom'
 import Card from '../Card/Card';
 import Paginado from '../Paginado'
@@ -11,6 +11,8 @@ export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
     const types = useSelector ((state)=> state.types)
+
+    const [orden, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
     const indixOfLastPokemon = currentPage * pokemonsPerPage
@@ -38,6 +40,13 @@ export default function Home (){
         dispatch(filterPokemonsByType(e.target.value));
     }
 
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByNameOrStrengh(e.target.value));
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
     return(
         <div>
             <Link to= '/pokemons'>Crear Pokemon</Link>
@@ -46,7 +55,7 @@ export default function Home (){
                 Volver a cargar
             </button>
             <div>
-                <select>
+                <select onChange={e => handleSort(e)}>
                     <option value="normal">Normal</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
