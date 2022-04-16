@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getPokemons, getTypes} from '../../actions';
+import { getPokemons, getTypes, filterPokemonsByType} from '../../actions';
 import {Link} from 'react-router-dom'
 import Card from '../Card/Card';
 import Paginado from '../Paginado'
@@ -10,7 +10,7 @@ import Paginado from '../Paginado'
 export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
-    const Types = useSelector ((state)=> state.types)
+    const types = useSelector ((state)=> state.types)
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
     const indixOfLastPokemon = currentPage * pokemonsPerPage
@@ -34,6 +34,9 @@ export default function Home (){
         dispatch(getPokemons());
     }
 
+    function handleFilterByType(e){
+        dispatch(filterPokemonsByType(e.target.value));
+    }
 
     return(
         <div>
@@ -55,8 +58,13 @@ export default function Home (){
                     <option value="Api">API</option>
                     <option value="Created">Created</option>
                 </select>
-                <select>
+                <select onChange={e => handleFilterByType(e)}>
                     <option value="All">all types</option>
+                    {
+                        types.map( type => (
+                            <option value={type.name} key={type.name}>{type.name}</option>
+                        ))
+                    }
                 </select>
             </div>
 
@@ -66,7 +74,6 @@ export default function Home (){
                 paginado = {paginado}
             />
             <div>
-
             {currentPokemons?.map((el) =>{
                 return(
                     <Fragment key={el.id}>
