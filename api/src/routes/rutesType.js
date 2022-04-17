@@ -1,0 +1,11 @@
+const {Router} = require('express');
+const {getTypes} = require ('../logic/index');
+const router = Router();
+
+/////////////////////////////jonathan/////////////////////////////////////////
+
+router.use('/', getTypes)
+
+/////////////////////////////jonathan/////////////////////////////////////////
+
+module.exports = router
