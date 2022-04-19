@@ -19,9 +19,19 @@ export function getTypes(){
     }
 }
 
-export function filterPokemonsByType(payload){
+export function filterPokemonsByType(type){
+
+    return async (dispatch) =>
+        dispatch({ 
+            type: "FILTER_BY_TYPES", 
+            payload: type })
+}
+
+
+export function orderByNameOrStrengh(payload){
+    
     return {
-        type: "FILTER_BY_TYPES",
+        type:"ORDER_BY_NAME_OR_STRENGH",
         payload
     }
 }

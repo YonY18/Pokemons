@@ -84,7 +84,7 @@ const getIds = async (req, res) => {
                 return temp = {name: el.type.name}
             });
             pokemon = {...pokemon, types: types};
-            return res.json(pokemon);
+            res.json(pokemon);
         } else {
             const pokemon = await Pokemon.findByPk(String(id), {
                 includes: {
@@ -92,7 +92,7 @@ const getIds = async (req, res) => {
                     attributes: ['name']
                 }
             });
-            if (pokemon)return res.json(pokemon);
+            if (pokemon) res.json(pokemon);
             else {
                 res.stats(400).json('ID no Valida')
             }

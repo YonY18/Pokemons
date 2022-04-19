@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Card({ name, image, types}) {
-    console.log(types)
+
     return (
         <div>
             <h3>{name}</h3>

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, getTypes, filterPokemonsByType } from '../../actions';
+import { getPokemons, getTypes, filterPokemonsByType, orderByNameOrStrengh } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
-
+import Paginado from '../Paginado'
 
 
 export default function Home (){
@@ -14,6 +14,16 @@ export default function Home (){
     
 
     
+    const [orden, setOrden] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
+    const indixOfLastPokemon = currentPage * pokemonsPerPage
+    const indexOfFirstPokemon = indixOfLastPokemon - pokemonsPerPage
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon,indixOfLastPokemon)
+
+    const paginado = (pageNumber) =>{
+        setCurrentPage(pageNumber)
+    }
 
     useEffect (()=>{
         dispatch(getPokemons());
@@ -26,8 +36,16 @@ export default function Home (){
         dispatch(getPokemons());
     }
 
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByNameOrStrengh(e.target.value));
+        setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
+    }
+
     function handleFilterByType(e){
         dispatch(filterPokemonsByType(e.target.value));
+        setCurrentPage(1)
     }
 
     return (
@@ -43,7 +61,7 @@ export default function Home (){
                 Recargar
             </button>
             <div>
-                <select>
+                <select onChange={e => handleSort(e)}>
 
                     <option value="normal">Normal</option>
                     <option value="asc">A - Z</option>
@@ -62,13 +80,18 @@ export default function Home (){
                 <option value="All">all types</option>
                     {
                         types.map( type => (
-                            <option value={type.name} key={type.name}>{type.name}</option>
+                            <option value={type.name} key={type.id}>{type.name}</option>
                         ))
                     }
                 </select>
     
-            
-            {allPokemons.map((el) =>{
+                <Paginado
+                pokemonsPerPage = {pokemonsPerPage}
+                allPokemons = {allPokemons.length}
+                paginado = {paginado}
+                />
+
+            {currentPokemons?.map((el) =>{
                 console.log(el.types)
                 return(
                     <Fragment key={el.name} >
