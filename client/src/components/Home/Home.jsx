@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, getTypes, filterPokemonsByType, orderByNameOrStrengh } from '../../actions';
+import { getPokemons, filterPokemonsByType, orderByNameOrStrengh, filterCreated } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
 import Paginado from '../Paginado'
-
+import SearchBar from '../SearchBar';
 
 export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
-    const types = useSelector ((state)=> state.types)
+  
     
 
     
-    const [orden, setOrden] = useState('')
+    const [order, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
     const indixOfLastPokemon = currentPage * pokemonsPerPage
@@ -27,7 +27,6 @@ export default function Home (){
 
     useEffect (()=>{
         dispatch(getPokemons());
-        dispatch(getTypes())
     },[dispatch])
 
 
@@ -43,7 +42,14 @@ export default function Home (){
         setOrden(`Ordenado ${e.target.value}`)
     }
 
+    function handleFilterCreated(e){
+        e.preventDefault();
+        dispatch(filterCreated(e.target.value))
+        setCurrentPage(1)
+    }
+
     function handleFilterByType(e){
+        e.preventDefault();
         dispatch(filterPokemonsByType(e.target.value));
         setCurrentPage(1)
     }
@@ -55,7 +61,7 @@ export default function Home (){
         
             <div>
                 
-            <Link to= '/pokemons'>Crear Pokemone</Link>
+            <Link to= '/create' >Crear Pokemone</Link>
             <h1>Los Pokemone</h1>
             <button onClick={e=> {handleClick(e)}}> 
                 Recargar
@@ -69,33 +75,47 @@ export default function Home (){
                     <option value="HAttack">Highest Attack</option>
                     <option value="LAttack">Lowest Attack</option>
                 </select>
-                <select>
-    
+
+                <select onChange={e => handleFilterCreated(e)}>
                     <option value="All">All</option>
-                    <option value="Api">API</option>
-                    <option value="Created">Created</option>
+                    <option value="created">Created</option>
+                    <option value="api">Existentes</option>
                 </select>
 
                 <select onChange={e => handleFilterByType(e)}>
-                <option value="All">all types</option>
-                    {
-                        types.map( type => (
-                            <option value={type.name} key={type.id}>{type.name}</option>
-                        ))
-                    }
-                </select>
+                        <option value='all'>All</option>
+                        <option value='grass'>Grass</option>
+                        <option value='poison'>Poison</option>
+                        <option value='fire'>Fire</option>
+                        <option value='flying'>Flying</option>
+                        <option value='water'>Water</option>
+                        <option value='bug'>Bug</option>
+                        <option value='normal'>Normal</option>
+                        <option value='electric'>Electric</option>
+                        <option value='ground'>Ground</option>
+                        <option value='fairy'>Fairy</option>
+                        <option value='rock'>Rock</option>
+                        <option value='ghost'>Ghost</option>
+                        <option value='steel'>Steel</option>
+                        <option value='psychic'>Psychic</option>
+                        <option value='ice'>Ice</option>
+                        <option value='dragon'>Dragon</option>
+                        <option value='stedarkel'>Stedarkel</option>
+                        <option value='shadow'>Shadow</option>
+                        <option value='unknown'>Unknown</option>
+                    </select>
     
                 <Paginado
                 pokemonsPerPage = {pokemonsPerPage}
                 allPokemons = {allPokemons.length}
                 paginado = {paginado}
                 />
+                <SearchBar/>
 
             {currentPokemons?.map((el) =>{
                 console.log(el.types)
                 return(
-                    <Fragment key={el.name} >
-                        
+                    <Fragment key={el.name}>
                         <Link to={"/home/" + el.name}>
                             <Card name={el.name} types={el.types} image={el.img}/>
                         </Link>

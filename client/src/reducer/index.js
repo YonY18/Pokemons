@@ -19,7 +19,26 @@ function rootReducer (state = initialState, action){
                 ...state,
                 types: action.payload,
             }
+        case "GET_NAME_POKEMONS":
+            return{
+                ...state,
+                pokemons: action.payload
+            }
+        case "POST_POKEMONS":
+            return{
+                ...state,
+            }
+        
 
+            
+            case "FILTER_CREATED": 
+   
+                const filtrado = action.payload === 'created'? state.allPokemons.filter(el => el.createdInDb) : state.allPokemons.filter(el=> !el.createdInDb) ;
+                return {
+                    ...state,
+                    pokemons: action.payload === 'ALL'? state.allPokemons : filtrado
+                }
+            
             /*  case "FILTER_BY_TYPES":
                 const allPokemons = state.allPokemons
                 const statusFiltered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload))
@@ -30,6 +49,14 @@ function rootReducer (state = initialState, action){
                     }*/
                     
                     case "FILTER_BY_TYPES":
+                        const allPokemons = state.allPokemons
+                        const filtered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload) )
+                            // console.log(state.allPokemons)
+                            return{         
+                                ...state,
+                                pokemons: filtered,
+                            }
+                        
                             /* const genreFilter = state.allPokemons.filter((g) =>
                           g.types.includes(action.payload)
                              );
@@ -37,18 +64,19 @@ function rootReducer (state = initialState, action){
                             return {
                                 ...state,
                                 pokemons: action.payload === "All" ? state.allPokemons : genreFilter,
-                                 };*/
+                                 };
                                  const allFilter = state.allPokemons
                                  const filter = allFilter.filter(c => {
                                     let countryAct = c.types.map(el => el.name);
                                     console.log(countryAct)
                                     return countryAct.includes(action.payload) ? c : null
                                     })
-                                    
+                                    const fuc = filter ? action.payload === "All" ? state.allPokemons : filter :
+                                    'noexiste'
                                     return {
                                     ...state,
-                                    pokemons: action.payload === "All" ? state.allPokemons : filter,
-                                     };
+                                    pokemons: fuc,
+                                     };*/
 
 
                     case "ORDER_BY_NAME_OR_STRENGH":
@@ -123,6 +151,7 @@ function rootReducer (state = initialState, action){
                                 ...state,
                                 pokemons: sortedArray
                             }
+
             default: 
             return state    
     }
