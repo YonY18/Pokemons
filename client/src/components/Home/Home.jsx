@@ -1,34 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
-import { useState, useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux";
-import { getPokemons, getTypes, orderByNameOrStrengh, filterPokemonsByType} from '../../actions';
-import {Link} from 'react-router-dom'
-import Card from '../Card/Card';
-import Paginado from '../Paginado'
+import { useDispatch, useSelector } from 'react-redux' ;
+import { getPokemons, getTypes, filterPokemonsByType } from '../../actions';
+import { Link } from 'react-router-dom';
+import Card from '../Card';
+
+
 
 export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
     const types = useSelector ((state)=> state.types)
-
-    const [orden, setOrden] = useState('')
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
-    const indixOfLastPokemon = currentPage * pokemonsPerPage
-    const indexOfFirstPokemon = indixOfLastPokemon - pokemonsPerPage
-    const currentPokemons = allPokemons.slice(indexOfFirstPokemon,indixOfLastPokemon)
-
-    const paginado = (pageNumber) =>{
-        setCurrentPage(pageNumber)
-    }
     
 
-    useEffect(()=>{
-        dispatch(getPokemons())
+    
+
+    useEffect (()=>{
+        dispatch(getPokemons());
         dispatch(getTypes())
     },[dispatch])
-
 
 
     function handleClick(e){
@@ -40,22 +30,21 @@ export default function Home (){
         dispatch(filterPokemonsByType(e.target.value));
     }
 
-    function handleSort(e){
-        e.preventDefault();
-        dispatch(orderByNameOrStrengh(e.target.value));
-        setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
-    }
-
-    return(
-        <div>
-            <Link to= '/pokemons'>Crear Pokemon</Link>
-            <h1>LoPokemone</h1>
-            <button  onClick={e => {handleClick(e)}}>
-                Volver a cargar
+    return (
+        <>
+        
+        {allPokemons.length?
+        
+            <div>
+                
+            <Link to= '/pokemons'>Crear Pokemone</Link>
+            <h1>Los Pokemone</h1>
+            <button onClick={e=> {handleClick(e)}}> 
+                Recargar
             </button>
             <div>
-                <select onChange={e => handleSort(e)}>
+                <select>
+
                     <option value="normal">Normal</option>
                     <option value="asc">A - Z</option>
                     <option value="desc">Z - A</option>
@@ -63,38 +52,41 @@ export default function Home (){
                     <option value="LAttack">Lowest Attack</option>
                 </select>
                 <select>
+    
                     <option value="All">All</option>
                     <option value="Api">API</option>
                     <option value="Created">Created</option>
                 </select>
+
                 <select onChange={e => handleFilterByType(e)}>
-                    <option value="All">all types</option>
+                <option value="All">all types</option>
                     {
                         types.map( type => (
                             <option value={type.name} key={type.name}>{type.name}</option>
                         ))
                     }
                 </select>
-            </div>
-
-            <Paginado
-                pokemonsPerPage = {pokemonsPerPage}
-                allPokemons = {allPokemons.length}
-                paginado = {paginado}
-            />
-            <div>
-            {currentPokemons?.map((el) =>{
+    
+            
+            {allPokemons.map((el) =>{
+                console.log(el.types)
                 return(
-                    <Fragment key={el.id}>
+                    <Fragment key={el.name} >
+                        
                         <Link to={"/home/" + el.name}>
-                            <Card name={el.name} types={el.types} image={el.img} weight={el.weight} height={el.height} />
+                            <Card name={el.name} types={el.types} image={el.img}/>
                         </Link>
                     </Fragment>
                     )
                 }) 
             }
+
             </div>
 
-        </div>
+
+        </div>:
+        <div>Cargando...</div>
+    }
+        </>
     )
 }

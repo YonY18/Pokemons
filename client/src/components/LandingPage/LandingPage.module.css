@@ -1,9 +1,0 @@
-/* From uiverse.io by @adamgiebl */
-position{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 100vh;
-    /* background: #E4ECFA; */
-    background: linear-gradient(90deg, rgba(255,160,26,1) 8%, rgba(255,196,42,1) 32%, rgba(255,222,95,1) 62%, rgba(255,252,133,1) 88%);
-}
