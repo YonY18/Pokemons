@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, filterPokemonsByType, orderByNameOrStrengh, filterCreated } from '../../actions';
+import { getPokemons, orderByName, filterIfCreated, orderByAttack, filterByType } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
 import Paginado from '../Paginado'
@@ -12,8 +12,6 @@ export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
   
-    
-
     
     const [order, setOrden] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
@@ -36,24 +34,33 @@ export default function Home (){
         dispatch(getPokemons());
     }
 
-    function handleSort(e){
+    function handleOrder(e) { 
         e.preventDefault();
-        dispatch(orderByNameOrStrengh(e.target.value));
+        dispatch(orderByName(e.target.value));
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
+        
+    }
+    function handleAttack(e) {
+        e.preventDefault();
+        dispatch(orderByAttack(e.target.value));
+        setCurrentPage(1);
+        
+    }
+    function handleFilterCreated(e) {
+        e.preventDefault();
+        dispatch(filterIfCreated(e.target.value));
+        setCurrentPage(1);
+    }
+    function handleFilterType(e) { 
+        e.preventDefault();
+        dispatch(filterByType(e.target.value));
+        setCurrentPage(1);
     }
 
-    function handleFilterCreated(e){
-        e.preventDefault();
-        dispatch(filterCreated(e.target.value))
-        setCurrentPage(1)
-    }
 
-    function handleFilterByType(e){
-        e.preventDefault();
-        dispatch(filterPokemonsByType(e.target.value));
-        setCurrentPage(1)
-    }
+
+
 
     return (
         <>
@@ -68,22 +75,22 @@ export default function Home (){
                 Recargar
             </button>
             <div>
-                <select onChange={e => handleSort(e)}>
+                    <select onChange={e => handleOrder(e)} >
+                        <option value='alpha'>A - Z</option>
+                        <option value='asc'>Ascendant</option>
+                        <option value='desc'>Descendant</option>
+                    </select>
+                    <select onChange={e => handleAttack(e)}>
+                        <option value='oa'>Attack Order</option>
+                        <option value='ascA'>Attack Desc</option>
+                        <option value='descA'>Attack Asc</option>
+                    </select>
+                    <select onChange={e => handleFilterCreated(e)}>
+                        <option value='all'>Existents</option>
+                        <option value='created'>Created</option>
+                    </select>
 
-                    <option value="normal">Normal</option>
-                    <option value="asc">A - Z</option>
-                    <option value="desc">Z - A</option>
-                    <option value="HAttack">Highest Attack</option>
-                    <option value="LAttack">Lowest Attack</option>
-                </select>
-
-                <select onChange={e => handleFilterCreated(e)}>
-                    <option value="All">All</option>
-                    <option value="created">Created</option>
-                    <option value="api">Existentes</option>
-                </select>
-
-                <select onChange={e => handleFilterByType(e)}>
+                <select onChange={e => handleFilterType(e)}>
                         <option value='all'>All</option>
                         <option value='grass'>Grass</option>
                         <option value='poison'>Poison</option>

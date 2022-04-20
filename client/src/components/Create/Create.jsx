@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -44,27 +45,27 @@ export default function Create() {
 
 
   useEffect(() => {
-      dispatch(getTypes());
+    dispatch(getTypes());
 
-  }, [dispatch]);
+}, [dispatch]);
 
-  useEffect(() => {
+useEffect(() => {
     setTypes(storeType);
 }, [storeType]);
 
 useEffect(() => {
     setPoke({ ...poke, types: valTypes });
-}, [valTypes, poke]);
+}, [valTypes]);
 
 const send = (el, event) => {
-  if (el.name !== '') {
-      let res = handleSubmit(event);
-      setSucces('Success');
-      console.log(res);
-  } else {
-      event.preventDefault();
-      setErr('error');
-  }
+    if (el.name !== '') {
+        let res = handleSubmit(event);
+        setSucces('Success');
+        console.log(res);
+    } else {
+        event.preventDefault();
+        setErr('error');
+    }
 }
 
 const handleType = (change) => {
