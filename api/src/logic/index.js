@@ -15,7 +15,7 @@ const getPokeApi = async (req, res) => {
             })
             if(pokemon) res.json(pokemon);
             else {
-                const urlPoke = await axios.get('https://pokeapi.co/api/v2/pokemon' + name);
+                const urlPoke = await axios.get('https://pokeapi.co/api/v2/pokemon/' + name);
                 if(urlPoke) {
                     pokemon = {
                         id: urlPoke.data.id,
@@ -80,8 +80,8 @@ const getIds = async (req, res) => {
                 weight: urlId.data.weight,
             }
             let types = urlId.data.types.map(el => {
-                let temp = {}
-                return temp = {name: el.type.name}
+                let gemps = {}
+                return gemps = {name: el.type.name}
             });
             pokemon = {...pokemon, types: types};
             res.json(pokemon);

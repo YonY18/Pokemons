@@ -26,17 +26,15 @@ export function getTypes(){
         }
     }
 }
-
 export const cleanTypes = ()=> (dispatch) => {
     dispatch({
         type: "CLEAN_TYPES"
     })
 }
-
 export function getPokemonsName(name){
     return async(dispatch) => {
         try{
-            let res = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+            let res = await axios.get(`http://localhost:3001/pokemons/${name}`);
             console.log(dispatch)   
             return dispatch({
                 type: "GET_NAME_POKEMONS",
@@ -60,6 +58,7 @@ export function getIds(id){
         }
     }
 }
+
 export const cleanId = () => (dispatch) => {
     let rest = {};
     dispatch({
@@ -67,6 +66,17 @@ export const cleanId = () => (dispatch) => {
         payload: rest
     })
 }
+export function postPokemon(payload) {
+    return async function (dispatch){
+        const response = await axios.post('http://localhost:3001/pokemons',payload);
+        return {
+            type:"POST_POKEMON",
+            payload: response
+        }
+    }
+}
+
+
 
 export function filterPokemonsByType(type){
 
@@ -93,9 +103,3 @@ export function filterCreated(payload){
     } 
 }
 
-export function postPokemons(payload) {
-    return async function (dispatch){
-        const response = await axios.post('http://localhost:3001/pokemons',payload);
-        return response
-    }
-  }

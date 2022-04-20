@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
@@ -115,9 +116,10 @@ export default function Home (){
             {currentPokemons?.map((el) =>{
                 console.log(el.types)
                 return(
-                    <Fragment key={el.name}>
-                        <Link to={"/home/" + el.name}>
-                            <Card name={el.name} types={el.types} image={el.img}/>
+                    <Fragment key={el.id}>
+                        <Link to={"/home/" + el.id}>
+                            <Card name={el.name} types={el.types} image={el.img} attack={el.attack} id={el.id}/>
+                            
                         </Link>
                     </Fragment>
                     )

@@ -15,6 +15,7 @@ function rootReducer (state = initialState, action){
                 allPokemons: action.payload,
             }
         case "GET_TYPES":
+            //console.log(action.payload)
             return {
                 ...state,
                 types: action.payload,
@@ -22,13 +23,20 @@ function rootReducer (state = initialState, action){
         case "GET_NAME_POKEMONS":
             return{
                 ...state,
-                pokemons: action.payload
+                pokemons: action.payload,
             }
         case "POST_POKEMONS":
             return{
                 ...state,
             }
-        
+        case "GET_ID":
+            return {
+                ...state,
+                details: action.payload
+            }
+
+            
+
 
             
             case "FILTER_CREATED": 
@@ -36,7 +44,7 @@ function rootReducer (state = initialState, action){
                 const filtrado = action.payload === 'created'? state.allPokemons.filter(el => el.createdInDb) : state.allPokemons.filter(el=> !el.createdInDb) ;
                 return {
                     ...state,
-                    pokemons: action.payload === 'ALL'? state.allPokemons : filtrado
+                    pokemons: filtrado
                 }
             
             /*  case "FILTER_BY_TYPES":
@@ -50,7 +58,7 @@ function rootReducer (state = initialState, action){
                     
                     case "FILTER_BY_TYPES":
                         const allPokemons = state.allPokemons
-                        const filtered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload) )
+                        const filtered = action.payload === "All" ? allPokemons : allPokemons.filter(el => el.types.includes(action.payload))
                             // console.log(state.allPokemons)
                             return{         
                                 ...state,

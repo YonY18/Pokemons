@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getTypes } from "../../actions";
 
-import pika from '../Imagenes/poke.jpg'
+import pika from '../../Imagenes/null.gif'
 
 export default function Create() {
   const validate = (input) => {
@@ -34,6 +35,7 @@ export default function Create() {
       types: []
   });
 
+
   const [errorName, setErrorName] = useState('');
   const [succes, setSucces] = useState('');
   const [err, setErr] = useState('');
@@ -52,7 +54,7 @@ export default function Create() {
 
 useEffect(() => {
     setPoke({ ...poke, types: valTypes });
-}, [valTypes]);
+}, [valTypes, poke]);
 
 const send = (el, event) => {
   if (el.name !== '') {
@@ -210,7 +212,7 @@ return(
           <input 
           type='checkbox' 
           onChange={handleType} 
-          value={el.id} 
+          value={el.name} 
           id={el.id} 
           />
           {el.name} 
