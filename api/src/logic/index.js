@@ -37,9 +37,12 @@ const getPokeApi = async (req, res) => {
         const urlApi = await axios.get('https://pokeapi.co/api/v2/pokemon');
         const bd = await Pokemon.findAll({
             attributes: ['name', 'img', 'attack', 'defense', 'id'],
-            includes: {
+            include: {
                 model: Type,
-                attributes: ['name']
+                attributes: ['name'],
+                through: {
+                    attributes: [],
+                  }
             }
         });
         let details = await Promise.all(urlApi.data.results.map(async el => await axios(el.url)));
