@@ -3,6 +3,8 @@ const initialState = {
     pokemons : [],
     allPokemons : [],
     types : [],
+    names: [],
+    details: {},
 }
 
 function rootReducer (state = initialState, action){
@@ -33,7 +35,7 @@ function rootReducer (state = initialState, action){
             return {
                 ...state,
                 details: action.payload
-            }
+            } 
 
         case "ORDER_BY_NAME": 
             let sortedPokemons = action.payload === 'asc'?

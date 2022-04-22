@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIds } from '../actions/index';
 import { Link } from "react-router-dom";
-
+import Loading from "./Loading";
 
 
 
@@ -38,11 +38,11 @@ export default function Details() {
                 <button>Home</button>
             </Link>
             <div key={stats.id} >
-                {Object.keys(stats).length === 0 ? <span>Wait a second please...</span> :
+                {Object.keys(stats).length === 0 ? <Loading/> :
                     <div>
                         <div>
                             <div>
-                                {stats.name}
+                                <h1>{stats.name}</h1>
                             </div>
                         </div>
                         <div>
@@ -62,16 +62,16 @@ export default function Details() {
                                 {stats.defense}
                             </div>
                             <div>
+                                <label>Speed: </label>
+                                {stats.speed}
+                            </div>
+                            <div>
                                 <label>Height: </label>
-                                {stats.height}
+                                {stats.height / 10}m
                             </div>
                             <div>
                                 <label>Weight: </label>
-                                {stats.weight}
-                            </div>
-                            <div>
-                                <label>Speed: </label>
-                                {stats.speed}
+                                {stats.weight / 10}kg
                             </div>
                             <div>
                                 <label>Id: </label>

@@ -45,13 +45,17 @@ export function getPokemonsName(name){
     }
 }
 export function getIds(id){
-    return async (dispatch) => {
-        let urlId = await axios.get(`http://localhost:3001/pokemons/${id}`);
-        dispatch({
-            type: "GET_ID",
-            payload: urlId
-        })
+    return async function (dispatch){
+        try{
+            let json = await axios.get("http://localhost:3001/pokemons/" + id);
 
+            return dispatch({
+                type:"GET_ID",
+                payload: json.data
+            }) 
+        } catch(error){
+            console.log(error)
+        }
     }
 }
 
