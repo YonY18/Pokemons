@@ -1,0 +1,29 @@
+.titulo{
+text-align: center;
+padding-top: 15rem;
+
+
+}
+
+.button {
+    padding-left: 33px;
+    padding-right: 33px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    border-radius: 9px;
+    background: #e4d760;
+    border: none;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+   }
+   
+   .button:hover {
+    box-shadow: 7px 5px 56px -14px #d9cb00;
+   }
+   
+   .button:active {
+    transform: scale(0.97);
+    box-shadow: 7px 5px 56px -10px #d5d900;
+   }

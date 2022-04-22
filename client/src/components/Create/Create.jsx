@@ -55,7 +55,7 @@ useEffect(() => {
 
 useEffect(() => {
     setPoke({ ...poke, types: valTypes });
-}, [valTypes]);
+},[valTypes]);
 
 const send = (el, event) => {
     if (el.name !== '') {

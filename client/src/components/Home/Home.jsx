@@ -2,18 +2,21 @@
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, orderByName, filterIfCreated, orderByAttack, filterByType } from '../../actions';
+import { getPokemons, orderByName, filterIfCreated, orderByAttack, filterByType, filterByName } from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
 import Paginado from '../Paginado'
 import SearchBar from '../SearchBar';
+import Loading from '../Loading';
+import style from '../../Estilos/Home.module.css';
+
 
 export default function Home (){
     const dispatch = useDispatch()
     const allPokemons = useSelector ((state)=> state.pokemons)
   
     
-    const [order, setOrden] = useState('')
+    const [stateName, setStateName] = useState('');
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
     const indixOfLastPokemon = currentPage * pokemonsPerPage
@@ -38,7 +41,7 @@ export default function Home (){
         e.preventDefault();
         dispatch(orderByName(e.target.value));
         setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
+
         
     }
     function handleAttack(e) {
@@ -58,6 +61,12 @@ export default function Home (){
         setCurrentPage(1);
     }
 
+    function handleChange(e) {
+        e.preventDefault();
+        setStateName((e.target.value).toLowerCase());
+        dispatch(filterByName((e.target.value).toLowerCase()));
+        setCurrentPage(1);
+    }
 
 
 
@@ -66,9 +75,7 @@ export default function Home (){
         <>
         
         {allPokemons.length?
-        
-            <div>
-                
+            <div className={style.home}>     
             <Link to= '/create' >Crear Pokemone</Link>
             <h1>Los Pokemone</h1>
             <button onClick={e=> {handleClick(e)}}> 
@@ -118,26 +125,26 @@ export default function Home (){
                 allPokemons = {allPokemons.length}
                 paginado = {paginado}
                 />
-                <SearchBar/>
-
+                <SearchBar stateName={stateName} handleChange={handleChange} />    
+            <div className={style.cards}>
             {currentPokemons?.map((el) =>{
                 console.log(el.types)
                 return(
                     <Fragment key={el.id}>
-                        <Link to={"/home/" + el.id}>
+                        <Link to={"/" + el.id}>
                             <Card name={el.name} types={el.types} image={el.img} attack={el.attack} id={el.id}/>
-                            
+         
                         </Link>
                     </Fragment>
                     )
                 }) 
             }
-
+            </div>
             </div>
 
 
         </div>:
-        <div>Cargando...</div>
+        <Loading/>
     }
         </>
     )

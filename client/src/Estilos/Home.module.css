@@ -1,0 +1,25 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto; 
+    grid-gap: 1rem;
+    margin-left: 0.5%;
+    padding-bottom: 2%;   
+}
+
+.home{
+    background: coral;
+    min-height: 100vh;
+}
+
+
+
+.sortfilter{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1%;
+}
+
+.sortfilter select option{
+    padding: 3%;
+}
