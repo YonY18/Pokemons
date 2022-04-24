@@ -78,7 +78,7 @@ export default function Details() {
                                 {stats.id}
                             </div>
                             <div >
-                            {stats.types.map((el, i) =>
+                            {stats.types?.map((el, i) =>
                                 <p key={i}>{el.name}</p>
                             )}
                             </div>

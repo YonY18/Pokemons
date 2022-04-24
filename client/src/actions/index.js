@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+/////////////////////////////jonathan/////////////////////////////////////////
 export function getPokemons() {
     return async (dispatch) => {
         try {
@@ -13,6 +13,7 @@ export function getPokemons() {
         }
     }
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function getTypes(){
     return async (dispatch) => {
         try{
@@ -26,11 +27,13 @@ export function getTypes(){
         }
     }
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export const cleanTypes = ()=> (dispatch) => {
     dispatch({
         type: "CLEAN_TYPES"
     })
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function getPokemonsName(name){
     return async(dispatch) => {
         try{
@@ -44,6 +47,7 @@ export function getPokemonsName(name){
         }
     }
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function getIds(id){
     return async function (dispatch){
         try{
@@ -58,7 +62,7 @@ export function getIds(id){
         }
     }
 }
-
+/////////////////////////////jonathan/////////////////////////////////////////
 export const cleanId = () => (dispatch) => {
     let rest = {};
     dispatch({
@@ -66,6 +70,7 @@ export const cleanId = () => (dispatch) => {
         payload: rest
     })
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function postPokemon(payload) {
     return async function (dispatch){
         const response = await axios.post('http://localhost:3001/pokemons',payload);
@@ -75,40 +80,41 @@ export function postPokemon(payload) {
         }
     }
 }
-
+/////////////////////////////jonathan/////////////////////////////////////////
 export function orderByName(payload){
     return {
         type: "ORDER_BY_NAME",
         payload
     } 
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function orderByAttack(payload){
     return {
         type: "ORDER_BY_ATTACK",
         payload
     }  
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function filterIfCreated(payload){
-    // console.log(payload)
     return{
         type: "FILTER_IF_CREATED",
         payload
     } 
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function filterByType(payload) {
-    // console.log(payload)
     return {
         type: "FILTER_BY_TYPE",
         payload
     }
 }
+/////////////////////////////jonathan/////////////////////////////////////////
 export function filterByName(payload){
-    // console.log(payload)
     return{
         type: "FILTER_BY_NAME",
         payload
     }
 }
-
+/////////////////////////////jonathan/////////////////////////////////////////
 
 
