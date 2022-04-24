@@ -53,13 +53,11 @@ function rootReducer (state = initialState, action){
                 return {...state, allPokemons: orderArray}
  /////////////////////////////jonathan/////////////////////////////////////////              
         case "FILTER_IF_CREATED": 
-        const allPokemonsArray = state.pokemons;
-        const filterOrigin = action.payload === 'createdInDb' ? allPokemonsArray.filter(pokemons => pokemons.createdInDb) : 
-                allPokemonsArray.filter(pokemons=> !pokemons.createdInDb)
+        const filtrado = action.payload === 'createdInDb'? state.allPokemons.filter(el => typeof el.id !== 'number') : state.allPokemons.filter(el=> typeof el.id === 'number') ;
         return {
-            ...state, 
-            allPokemons: action.payload === 'All' ? allPokemonsArray : filterOrigin
-        }  
+            ...state,
+            pokemons: action.payload === 'All'? state.allPokemons : filtrado
+        }
 /////////////////////////////jonathan/////////////////////////////////////////
         case "FILTER_BY_TYPE":
             const filtered = action.payload === 'all'? state.allPokemons : state.allPokemons.filter(el => el.types[0].name === action.payload) 
