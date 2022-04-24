@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import {Link} from 'react-router-dom'
-import style from '../Estilos/Card.module.css'
+import estilos from '../Estilos/Card.module.css'
 
 export default function Card({id, name, image, types, attack}) {
 
     return (
-        <div style={style.card}>
+        <div style={estilos.card}>
             <h3>{name}</h3>
             <img src={image} alt="Img not found" height="190px"/>
             <h5>{types?.map(e=> <div key={e.name}>{e.name}</div> )}</h5>

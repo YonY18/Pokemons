@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux' ;
 import SearchBar from "./SearchBar";
 import { Link } from 'react-router-dom';
 import { filterByName } from "../actions"
+import estilos from "../Estilos/NavBar.module.css"
 
-export default function NavBar({allTypes, handleOrder, handleAttack, handleFilterCreated, handleFilterType}){
+export default function NavBar({allTypes, handleOrder, handleAttack, handleFilterCreated, handleFilterType, handleClick}){
     const dispatch = useDispatch()
     const [stateName, setStateName] = useState('');
 
@@ -15,12 +16,15 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
     }
 
     return(
-        <>
+        <div className={estilos.contenedorFiltro}>
+            <button onClick={e=> {handleClick(e)}}> 
+                Recargar
+            </button>
         <div>
             <SearchBar stateName={stateName} handleChange={handleChange} />
         </div>
         <div>
-            <label>Ordenar por</label>
+            <label className={estilos.label}>Ordenar por</label>
             <select onChange={e => handleOrder(e)}>  
                 <option value="asc">Aa to Zz</option> 
                 <option value="desc">Zz to Aa</option> 
@@ -32,7 +36,7 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
             </select>
         </div>
         <div>
-        <label >Filter by: </label>
+        <label className={estilos.label}>Filter by: </label>
             <select defaultValue ='Origin' onChange={e => handleFilterCreated(e)}>
                 <option value="All">Created In</option>    
                 <option value="api">Api</option> 
@@ -53,6 +57,6 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
 
 
         
-        </>
+        </div>
     )
 }

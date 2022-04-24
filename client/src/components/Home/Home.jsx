@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Card from '../Card';
 import Paginado from '../Paginado'
 import Loading from '../Loading';
-import style from '../../Estilos/Home.module.css';
+import estilos from '../../Estilos/Home.module.css';
 import NavBar from '../NavBar';
 
 
@@ -58,13 +58,11 @@ export default function Home (){
 
     return (
         <>
-            <div className={style.home}>     
+            <div className={estilos.home}>     
             <h1>Los Pokemone</h1>
-            <button onClick={e=> {handleClick(e)}}> 
-                Recargar
-            </button>
             <NavBar 
                 allTypes={allTypes}
+                handleClick={handleClick}
                 handleOrder={handleOrder}
                 handleAttack={handleAttack}
                 handleFilterCreated={handleFilterCreated}
@@ -78,7 +76,7 @@ export default function Home (){
                 paginado = {paginado}
                 />
         
-            <div className={style.cards}>
+            <div className={estilos.cards}>
             {currentPokemons?.map((el) =>{
                 console.log(el.types)
                 return(

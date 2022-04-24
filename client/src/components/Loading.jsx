@@ -1,9 +1,9 @@
 import pikaLoader from '../Imagenes/loading.gif'
-import styles from "../Estilos/Loading.module.css";
+import estilos from "../Estilos/Loading.module.css";
 
 function Loading() {
     return (
-        <div className={styles.spinner}>
+        <div className={estilos.spinner}>
             <img 
 				src={pikaLoader}
 				alt='Pikachu loader'

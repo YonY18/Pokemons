@@ -1,232 +1,216 @@
-/* eslint-disable no-unused-vars */
-
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getTypes } from "../../actions";
-
-import pika from '../../Imagenes/null.gif'
-
-export default function Create() {
-  const validate = (input) => {
-      let error
-      if (!input.name) {
-          error = 'Insert Name'
-      }
-      return error;
-  }
-
-  async function postPokemons(a) {
-    const urlLocal = await axios.post('http://localhost:3001/pokemons', a);
-    return urlLocal;
-}
-
-  const dispatch = useDispatch()
-  const [valTypes, setValTypes] = useState([]);
-  const [poke, setPoke] = useState({
-      name: '',
-      img: pika,
-      hp: 0,
-      attack: 0,
-      defense: 0,
-      height: 0,
-      weight: 0,
-      speed: 0,
-      types: []
-  });
+import { getTypes, postPokemon } from "../../actions/index";
+import {useDispatch, useSelector} from 'react-redux'
 
 
-  const [errorName, setErrorName] = useState('');
-  const [succes, setSucces] = useState('');
-  const [err, setErr] = useState('');
-  const [types, setTypes] = useState([]);
-  const storeType = useSelector(store => store.types);
 
 
-  useEffect(() => {
-    dispatch(getTypes());
+export default function CreatePokemon(){
 
-}, [dispatch]);
-
-useEffect(() => {
-    setTypes(storeType);
-}, [storeType]);
-
-useEffect(() => {
-    setPoke({ ...poke, types: valTypes });
-},[valTypes]);
-
-const send = (el, event) => {
-    if (el.name !== '') {
-        let res = handleSubmit(event);
-        setSucces('Success');
-        console.log(res);
-    } else {
-        event.preventDefault();
-        setErr('error');
-    }
-}
-
-const handleType = (change) => {
-  if (change.target.checked) {
-      setValTypes([change.target.value, ...valTypes]);
-  } else {
-      setValTypes(valTypes.filter(el => el !== change.target.value));
-  }
-}
-
-const handleName = (change) => {
-  setSucces('');
-  setErr('');
-  setPoke({ ...poke, name: change.target.value });
-  setErrorName(validate({ ...poke, name: change.target.value }));
-}
-
-const handleHp = (change) => {
-  setPoke({ ...poke, hp: change.target.value });
-}
-
-const handleAttack = (change) => {
-  setPoke({ ...poke, attack: change.target.value });
-}
-
-const handleDefense = (change) => {
-  setPoke({ ...poke, defense: change.target.value });
-}
-
-const handleWeight = (change) => {
-  setPoke({ ...poke, weight: change.target.value });
-}
-
-const handleHeight = (change) => {
-  setPoke({ ...poke, height: change.target.value });
-}
-
-const handleSpeed = (change) => {
-  setPoke({ ...poke, speed: change.target.value })
-}
-
-const handleSubmit = (submit) => {
-  submit.preventDefault();
-  let upload = postPokemons(poke);
-
-  setPoke({
-      name: '',
-      img: '',
-      hp: 0,
-      attack: 0,
-      defense: 0,
-      height: 0,
-      weight: 0,
-      types: []
-  });
-  submit.target.reset();
-  return upload;
-}
-
-return(
-  <div>
-    <Link to= '/home'><button>Volver</button></Link>
-    <h1>Crea tu Pokemon!</h1>
-
-    <form onSubmit={(event) => send(poke, event)}>
-      <div>
-        <label>Nombre:</label>
-        <input 
-        type='text' 
-        onChange={handleName} 
-        placeholder='Name' 
-        value={poke.name} 
-        name='name' 
-        />
-      </div>
-      <div>
-        <label>Vida:</label>
-        <input 
-        type='number' 
-        onChange={handleHp} 
-        placeholder='LifePoints' 
-        value={poke.hp} 
-        name='lifepoints' 
-        min='0' 
-        />
-      </div>
-      <div>
-        <label>Ataque:</label>
-        <input type='number' 
-        onChange={handleAttack} 
-        placeholder='Attack Points' 
-        value={poke.attack} 
-        name='attack' 
-        min='0' 
-        />
-      </div>
-      <div>
-        <label>Defensa:</label>
-        <input 
-        type='number' 
-        onChange={handleDefense} 
-        placeholder='Defense Points' 
-        value={poke.defense} 
-        name='defense' 
-        min='0' 
-        />
-      </div>
-      <div>
-        <label>Peso:</label>
-        <input 
-        type='number' 
-        onChange={handleWeight} 
-        placeholder='Weight' 
-        value={poke.weight} 
-        name='weight' 
-        min='0' 
-        />
-      </div>
-      <div>
-        <label>Altura:</label>
-        <input 
-        type='number' 
-        onChange={handleHeight} 
-        placeholder='Height' 
-        value={poke.height} 
-        name='height' 
-        min='0' 
-        />
-      </div>
-      <div>
-        <label>Velocidad:</label>
-        <input 
-        type='number' 
-        onChange={handleSpeed} 
-        placeholder='Speed' 
-        value={poke.speed} 
-        name='speed' 
-        min='0' 
-        />
-      </div>
-      <label> TYPES</label>
-        <div>
-          {types.map((el, j) =>
-          <span key={j}>
-          <input 
-          type='checkbox' 
-          onChange={handleType} 
-          value={el.name} 
-          id={el.id} 
-          />
-          {el.name} 
-          </span>
-          )}
-        </div>
+    function Validation(input){
+        
+        let error = {required: false};
+        console.log(error)
+        if(!input.name){
+            error.name = 'Please enter poke-name'
+            error.required = true;
+        } else if (!/\S{1,15}[^0-9]/.test(input.name)){
+            error.name = 'Name is invalid. It must be contain 2 to 15 characters';
+            error.required = true
+        }
+        
+        if(input.hp <= 0 || input.hp > 150){
+            error.hp = 'Hp value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
+        
+        if(input.attack <= 0 || input.attack > 150){
+            error.attack = 'Attack value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
     
-        <div>{succes && <h2>Creado Correctamente</h2>}</div>
-        <div>{err && <h2>OOPS... </h2>}</div>
-        <div><input type='submit' value='CREATE!'/></div>
+        if(input.defense <= 0 || input.defense > 150){
+            error.defense = 'Defense value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
+    
+        if(input.speed <= 0 || input.speed > 150){
+            error.speed = 'Speed value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
+    
+        if(input.weight <= 0 || input.weight > 150){
+            error.weight = 'Weight value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
+        if(input.height <= 0 || input.height > 150){
+            error.height = 'Height value must be greater than 0 but not exceed 150 points'
+            error.required = true
+        }
+        
+        return error;
+    }
+    
 
-    </form>
-  </div>
+    const dispatch = useDispatch();
+    const types = useSelector((state)=>state.types)
+    
 
-)
+    const [error, setError] = useState({required: true});
+
+    const [input, setInput] = useState({
+        name: '',
+        img:'',
+        types: [],
+        hp:0,
+        attack:0,
+        defense:0,
+        speed:0,
+        weight:0,
+        height:0
+    })
+
+
+    function handleChange(event){
+        setInput({
+            ...input, [event.target.name]:event.target.value 
+        })
+        
+        let objError = Validation({...input, [event.target.name] : event.target.value})
+        setError(objError)
+    }
+
+    function handleSelect(event){
+        setInput({
+            ...input, types: [...input.types, event.target.value] 
+        })
+        let objError = Validation({...input, [event.target.name] : event.target.value})
+        setError(objError)
+    }
+
+    useEffect(()=>{
+        if(input.types.length === 0){
+            setError({...error, required: true, types: 'Please choose at least one types'})
+        } 
+    }, [input.types, error.required])
+
+    function handleSubmit(event){
+        if(error.required){
+            event.preventDefault()
+            alert('You must complete all the required information')
+        } else { event.preventDefault();
+            dispatch(postPokemon(input))
+            alert('Pokemon created succesfully!!')
+            setInput({
+                name: '',
+                img:'',
+                types: [],
+                hp:0,
+                attack:0,
+                defense:0,
+                speed:0,
+                weight:0,
+                height:0
+            })}
+           
+       
+    }
+
+    function handleDelete(option){
+        setInput({
+            ...input,
+            types: input.types.filter(types=>types !== option)
+        })
+    }
+
+
+    
+    useEffect(()=>{
+        dispatch(getTypes())
+    },[dispatch])
+
+
+
+    
+    return(
+        
+        <div >
+            
+            <h1 >Create your own pokemon!</h1>
+           
+            <form  onSubmit={event=>handleSubmit(event)}>
+                <div >
+                    <label htmlFor="">Name:</label>
+                    <input types="text" value={input.name} name='name' placeholder="Enter a name" onChange={handleChange}/>
+                    {!error.name ? null : (<span>{error.name}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Image:</label>
+                    <input types='text' value={input.img} name='img' placeholder="Enter a URL" onChange={handleChange}/>
+                </div>
+                <div >
+                    <label htmlFor="">Hp:</label>
+                    <input types='number' value={input.hp} name='hp' placeholder="Enter a value" onChange={handleChange}/>
+                    {!error.hp ? null : (<span>{error.hp}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Attack:</label>
+                    <input types='number' value={input.attack} name='attack' placeholder="Enter a value" onChange={handleChange}/>
+                    {!error.attack ? null : (<span>{error.attack}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Defense:</label>
+                    <input types='number' value={input.defense} name='defense' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.defense ? null : (<span>{error.defense}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Speed:</label>
+                    <input types='number' value={input.speed} name='speed' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.speed ? null : (<span>{error.speed}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Weight:</label>
+                    <input types='number' value={input.weight} name='weight' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.weight ? null : (<span>{error.weight}</span>)}
+                </div>
+                <div >
+                    <label htmlFor="">Height:</label>
+                    <input types='number' value={input.height} name='height' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.height ? null : (<span>{error.height}</span>)}
+                </div>
+                <div >
+                    <label >Type:</label>
+                    <select onChange={event=>handleSelect(event)}>
+                    {types &&
+                        types.map((types) => {
+                        return (
+                            <option cvalue={types.name} key={types.name}>
+                                {types.name}
+                            </option>
+                        );
+                        })}
+                    </select>
+                    {!error.types ? null : (<span>{error.types}</span>)}
+                </div>
+
+                <div >
+                  {input.types.map((el) => {
+                    return (
+                        <div key={el}>
+                            <h4 >{el}</h4>
+                            <button onClick={() => {handleDelete(el)}}>x</button>
+                        </div>
+                    );
+                  })}
+                </div>
+                
+
+                <button types="submit">Create Pokemon!</button>
+
+            </form>
+            <Link to='/Home'><button >Back to Home</button></Link>
+        </div>
+    )
 }

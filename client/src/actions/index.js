@@ -71,13 +71,13 @@ export const cleanId = () => (dispatch) => {
     })
 }
 /////////////////////////////jonathan/////////////////////////////////////////
-export function postPokemon(payload) {
-    return async function (dispatch){
-        const response = await axios.post('http://localhost:3001/pokemons',payload);
-        return {
-            type:"POST_POKEMON",
-            payload: response
-        }
+export function postPokemon(payload){
+    return async function(dispatch){
+        const pokemon = await axios.post('http://localhost:3001/pokemons', payload)
+        return dispatch({
+            type: 'POST_POKEMON',
+            payload: pokemon
+        })
     }
 }
 /////////////////////////////jonathan/////////////////////////////////////////
