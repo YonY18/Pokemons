@@ -24,7 +24,7 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
             
             <div className={estilos.contenedorOrden}>
                 <div className={estilos.orden}>
-                    <label className={estilos.label}>Ordenar por</label>
+                    <label className={estilos.label}>Ordenar por: </label>
                     <select className={estilos.ordenSelect} onChange={e => handleOrder(e)}>
                         <option value="asc">Aa to Zz</option>
                         <option value="desc">Zz to Aa</option>
@@ -41,14 +41,14 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
                 <div className={estilos.orden}>
                     <label className={estilos.label}>Aplicar filtros: </label>
                     <select className={estilos.ordenSelect} defaultValue='Origin' onChange={e => handleFilterCreated(e)}>
-                        <option value="All">Created In</option>
+                        <option value="All">Creado en</option>
                         <option value="api">Api</option>
-                        <option value="createdInDb">Data Base</option>
+                        <option value="createdInDb">Base de Datos</option>
                     </select>
 
                     <select className={estilos.ordenSelect} defaultValue='Types' onChange={e => handleFilterType(e)}>
-                        <option value="Types" disabled>Types</option>
-                        <option value="all">All Types</option>
+                        <option value="Types" disabled>Tipos</option>
+                        <option value="all">Todos los Tipos</option>
                         
                         {allTypes && allTypes.map((e) => ( <option value={e.name} key={e.name}>{e.name}</option>))}
                     </select>
@@ -56,7 +56,7 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
             </div>
 
             <div>
-                <Link to='/create'><button className={estilos.button}>Create Pokemon</button></Link>
+                <Link to='/create'><button className={estilos.button}>Crea tu Pokemon!</button></Link>
             </div>
                            
 

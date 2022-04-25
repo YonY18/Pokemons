@@ -59,7 +59,7 @@ export default function Home (){
     return (
         <>
             <div className={estilos.home}>     
-            <h1 className={estilos.titulo}>Los Pokemone</h1>
+            <h1 className={estilos.titulo}>Pokemons!</h1>
             <NavBar 
                 allTypes={allTypes}
                 handleClick={handleClick}

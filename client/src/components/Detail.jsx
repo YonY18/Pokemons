@@ -53,27 +53,27 @@ export default function Details() {
                         <div className={estilos.contenedorInfo}>
                             <button className={estilos.buttondelete} onClick={handleDelete}>❌</button>
                             <div>
-                                <label>Life Points: </label>
+                                <label>Puntos de Salud: </label>
                                 {stats.hp}
                             </div>
                             <div>
-                                <label>Attack: </label>
+                                <label>Puntos de Ataque: </label>
                                 {stats.attack}
                             </div>
                             <div>
-                                <label>Defense: </label>
+                                <label>Puntos de Defensa: </label>
                                 {stats.defense}
                             </div>
                             <div>
-                                <label>Speed: </label>
+                                <label>Puntos de Velocidad: </label>
                                 {stats.speed}
                             </div>
                             <div>
-                                <label>Height: </label>
+                                <label>Altura: </label>
                                 {stats.height / 10}m
                             </div>
                             <div>
-                                <label>Weight: </label>
+                                <label>Peso: </label>
                                 {stats.weight / 10}kg
                             </div>
                             <div>

@@ -12,9 +12,9 @@ export default function LandingPage(){
     
     return(
         <div className={estilos.LandingPage}>
-            <h1 className={estilos.titulo}>Let's go Pokemons</h1>
+            <h1 className={estilos.titulo}>Let's go Pokemons!</h1>
             <div className={estilos.link}><Link to = '/home'>
-                <button className={estilos.button}>Let's go</button>
+                <button className={estilos.button}>Let's go!</button>
             </Link></div>
         </div>
     )

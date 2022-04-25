@@ -14,39 +14,39 @@ export default function CreatePokemon(){
         let error = {required: false};
         console.log(error)
         if(!input.name){
-            error.name = 'Please enter poke-name'
+            error.name = 'Por favor ingrese el nombre del Pokemon'
             error.required = true;
         } else if (!/\S{1,15}[^0-9]/.test(input.name)){
-            error.name = 'Name is invalid. It must be contain 2 to 15 characters';
+            error.name = 'El nombre no es válido. Debe contener de 2 a 15 caracteres';
             error.required = true
         }
         
         if(input.hp <= 0 || input.hp > 150){
-            error.hp = 'Hp value must be greater than 0 but not exceed 150 points'
+            error.hp = 'Salud debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
         
         if(input.attack <= 0 || input.attack > 150){
-            error.attack = 'Attack value must be greater than 0 but not exceed 150 points'
+            error.attack = 'Ataque debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
     
         if(input.defense <= 0 || input.defense > 150){
-            error.defense = 'Defense value must be greater than 0 but not exceed 150 points'
+            error.defense = 'Defensa debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
     
         if(input.speed <= 0 || input.speed > 150){
-            error.speed = 'Speed value must be greater than 0 but not exceed 150 points'
+            error.speed = 'Velocidad debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
     
         if(input.weight <= 0 || input.weight > 150){
-            error.weight = 'Weight value must be greater than 0 but not exceed 150 points'
+            error.weight = 'Peso debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
         if(input.height <= 0 || input.height > 150){
-            error.height = 'Height value must be greater than 0 but not exceed 150 points'
+            error.height = 'Altura debe ser mayor que 0 pero no exceder los 150 puntos'
             error.required = true
         }
         
@@ -92,17 +92,17 @@ export default function CreatePokemon(){
 
     useEffect(()=>{
         if(input.types.length === 0){
-            setError({...error, required: true, types: 'Please choose at least one types'})
+            setError({...error, required: true, types: 'Elija al menos un tipo'})
         } 
     }, [input.types, error.required])
 
     function handleSubmit(event){
         if(error.required){
             event.preventDefault()
-            alert('You must complete all the required information')
+            alert('Debes completar toda la información requerida')
         } else { event.preventDefault();
             dispatch(postPokemon(input))
-            alert('Pokemon created succesfully!!')
+            alert('Pokemon creado con éxito!!')
             setInput({
                 name: '',
                 img:'',
@@ -138,50 +138,50 @@ export default function CreatePokemon(){
         
         <div className={estilos.contenedorGral}>
             
-            <h2 >Create your own pokemon!</h2>
+            <h2 >Crea tu pokemon!</h2>
            
             <form className={estilos.formulario} onSubmit={event=>handleSubmit(event)}>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Name:</label>
+                    <label htmlFor="">Nombre:</label>
                     <input className={estilos.input} types="text" value={input.name} name='name' placeholder="Enter a name" onChange={handleChange}/>
                     {!error.name ? null : (<span className={estilos.span}>{error.name}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Image:</label>
+                    <label htmlFor="">Imagen:</label>
                     <input  className={estilos.input} types='text' value={input.img} name='img' placeholder="Enter a URL" onChange={handleChange}/>
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Hp:</label>
+                    <label htmlFor="">Salud:</label>
                     <input  className={estilos.input} types='number' value={input.hp} name='hp' placeholder="Enter a value" onChange={handleChange}/>
                     {!error.hp ? null : (<span className={estilos.span}>{error.hp}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Attack:</label>
+                    <label htmlFor="">Ataque:</label>
                     <input  className={estilos.input} types='number' value={input.attack} name='attack' placeholder="Enter a value" onChange={handleChange}/>
                     {!error.attack ? null : (<span className={estilos.span}>{error.attack}</span>) }
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Defense:</label>
+                    <label htmlFor="">Defensa:</label>
                     <input  className={estilos.input} types='number' value={input.defense} name='defense' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.defense ? null : (<span className={estilos.span}>{error.defense}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Speed:</label>
+                    <label htmlFor="">Velocidad:</label>
                     <input  className={estilos.input} types='number' value={input.speed} name='speed' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.speed ? null : (<span className={estilos.span}>{error.speed}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Weight:</label>
+                    <label htmlFor="">Peso:</label>
                     <input  className={estilos.input} types='number' value={input.weight} name='weight' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.weight ? null : (<span className={estilos.span}>{error.weight}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Height:</label>
+                    <label htmlFor="">Altura:</label>
                     <input  className={estilos.input} types='number' value={input.height} name='height' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.height ? null : (<span className={estilos.span}>{error.height}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label >Type:</label>
+                    <label >Tipos:</label>
                     <select onChange={event=>handleSelect(event)}>
                     {types &&
                         types.map((types) => {
@@ -207,10 +207,10 @@ export default function CreatePokemon(){
                 </div>
                 
 
-                <button className={estilos.button} types="submit">Create Pokemon!</button>
+                <button className={estilos.button} types="submit">Crear tu Pokemon!</button>
 
             </form>
-            <Link to='/Home'><button className={estilos.button}>Back to Home</button></Link>
+            <Link to='/Home'><button className={estilos.button}>Volver al Home</button></Link>
         </div>
     )
 }
