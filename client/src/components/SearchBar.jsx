@@ -4,8 +4,8 @@ import styles from '../Estilos/SearchBar.module.css'
 export default function SearchBar({handleChange, stateName}){
 
     return (
-        <div>
-            <input className={styles.search} 
+        <div className={styles.search}>
+            <input className={styles.input} 
             type={'text'} 
             placeholder='Search...' 
             autoComplete='off' 

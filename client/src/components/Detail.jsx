@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getIds } from '../actions/index';
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
-
+import estilos from '../Estilos/Detail.module.css'
 
 
 export default function Details() {
@@ -35,42 +35,46 @@ export default function Details() {
     return (
         <div>
             <Link to= '/home'>
-                <button>Home</button>
+                <button className={estilos.button}>Home</button>
             </Link>
             <div key={stats.id} >
                 {Object.keys(stats).length === 0 ? <Loading/> :
-                    <div>
-                        <div>
-                            <div>
-                                <h1>{stats.name}</h1>
-                            </div>
-                        </div>
-                        <div>
+                <div className={estilos.todo}>
+                
+               
+                   
+                            
+                    <h1 className={estilos.titulo}>{stats.name}</h1>
+                
+                     
+                    <div className={estilos.contGral}>
+                        
+                        
                             <img src={stats.img} alt='detailsPicture' />
-                        </div>
-                        <div> 
+                       
+                        <div className={estilos.contenedorInfo}> 
                             <div>
-                                <label>Life Points: </label>
+                                <label>Puntos de Salud: </label>
                                 {stats.hp}
                             </div>
                             <div>
-                                <label>Attack: </label>
+                                <label>Puntos de Ataque: </label>
                                 {stats.attack}
                             </div>
                             <div>
-                                <label>Defense: </label>
+                                <label>Puntos de Defensa: </label>
                                 {stats.defense}
                             </div>
                             <div>
-                                <label>Speed: </label>
+                                <label>Puntos de Velocidad: </label>
                                 {stats.speed}
                             </div>
                             <div>
-                                <label>Height: </label>
+                                <label>Puntos de Peso: </label>
                                 {stats.height / 10}m
                             </div>
                             <div>
-                                <label>Weight: </label>
+                                <label>Puntos de Altura: </label>
                                 {stats.weight / 10}kg
                             </div>
                             <div>
@@ -83,6 +87,7 @@ export default function Details() {
                             )}
                             </div>
                         </div>
+                    </div>
                     </div>}
             </div>
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTypes, postPokemon } from "../../actions/index";
 import {useDispatch, useSelector} from 'react-redux'
-
+import estilos from '../../Estilos/Create.module.css'
 
 
 
@@ -136,52 +136,52 @@ export default function CreatePokemon(){
     
     return(
         
-        <div >
+        <div className={estilos.contenedorGral}>
             
-            <h1 >Create your own pokemon!</h1>
+            <h2 >Crea tu Pokemon!</h2>
            
-            <form  onSubmit={event=>handleSubmit(event)}>
-                <div >
-                    <label htmlFor="">Name:</label>
-                    <input types="text" value={input.name} name='name' placeholder="Enter a name" onChange={handleChange}/>
-                    {!error.name ? null : (<span>{error.name}</span>)}
+            <form className={estilos.formulario} onSubmit={event=>handleSubmit(event)}>
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Nombre:</label>
+                    <input className={estilos.input} types="text" value={input.name} name='name' placeholder="Enter a name" onChange={handleChange}/>
+                    {!error.name ? null : (<span className={estilos.span}>{error.name}</span>)}
                 </div>
-                <div >
-                    <label htmlFor="">Image:</label>
-                    <input types='text' value={input.img} name='img' placeholder="Enter a URL" onChange={handleChange}/>
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Imagen:</label>
+                    <input  className={estilos.input} types='text' value={input.img} name='img' placeholder="Enter a URL" onChange={handleChange}/>
                 </div>
-                <div >
-                    <label htmlFor="">Hp:</label>
-                    <input types='number' value={input.hp} name='hp' placeholder="Enter a value" onChange={handleChange}/>
-                    {!error.hp ? null : (<span>{error.hp}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Salud:</label>
+                    <input  className={estilos.input} types='number' value={input.hp} name='hp' placeholder="Enter a value" onChange={handleChange}/>
+                    {!error.hp ? null : (<span className={estilos.span}>{error.hp}</span>)}
                 </div>
-                <div >
-                    <label htmlFor="">Attack:</label>
-                    <input types='number' value={input.attack} name='attack' placeholder="Enter a value" onChange={handleChange}/>
-                    {!error.attack ? null : (<span>{error.attack}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Ataque:</label>
+                    <input  className={estilos.input} types='number' value={input.attack} name='attack' placeholder="Enter a value" onChange={handleChange}/>
+                    {!error.attack ? null : (<span className={estilos.span}>{error.attack}</span>) }
                 </div>
-                <div >
-                    <label htmlFor="">Defense:</label>
-                    <input types='number' value={input.defense} name='defense' placeholder="Enter a value"onChange={handleChange}/>
-                    {!error.defense ? null : (<span>{error.defense}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Defensa:</label>
+                    <input  className={estilos.input} types='number' value={input.defense} name='defense' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.defense ? null : (<span className={estilos.span}>{error.defense}</span>)}
                 </div>
-                <div >
-                    <label htmlFor="">Speed:</label>
-                    <input types='number' value={input.speed} name='speed' placeholder="Enter a value"onChange={handleChange}/>
-                    {!error.speed ? null : (<span>{error.speed}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Velocidad:</label>
+                    <input  className={estilos.input} types='number' value={input.speed} name='speed' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.speed ? null : (<span className={estilos.span}>{error.speed}</span>)}
                 </div>
-                <div >
-                    <label htmlFor="">Weight:</label>
-                    <input types='number' value={input.weight} name='weight' placeholder="Enter a value"onChange={handleChange}/>
-                    {!error.weight ? null : (<span>{error.weight}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Peso:</label>
+                    <input  className={estilos.input} types='number' value={input.weight} name='weight' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.weight ? null : (<span className={estilos.span}>{error.weight}</span>)}
                 </div>
-                <div >
-                    <label htmlFor="">Height:</label>
-                    <input types='number' value={input.height} name='height' placeholder="Enter a value"onChange={handleChange}/>
-                    {!error.height ? null : (<span>{error.height}</span>)}
+                <div className={estilos.contenedorInputs}>
+                    <label htmlFor="">Altura:</label>
+                    <input  className={estilos.input} types='number' value={input.height} name='height' placeholder="Enter a value"onChange={handleChange}/>
+                    {!error.height ? null : (<span className={estilos.span}>{error.height}</span>)}
                 </div>
-                <div >
-                    <label >Type:</label>
+                <div className={estilos.contenedorInputs}>
+                    <label >Tipo:</label>
                     <select onChange={event=>handleSelect(event)}>
                     {types &&
                         types.map((types) => {
@@ -192,25 +192,25 @@ export default function CreatePokemon(){
                         );
                         })}
                     </select>
-                    {!error.types ? null : (<span>{error.types}</span>)}
+                    {!error.types ? null : (<span className={estilos.span}>{error.types}</span>)}
                 </div>
 
-                <div >
+                <div className={estilos.contenedorSeleccion}>
                   {input.types.map((el) => {
                     return (
-                        <div key={el}>
-                            <h4 >{el}</h4>
-                            <button onClick={() => {handleDelete(el)}}>x</button>
+                        <div className={estilos.contenedorSeleccionContenido} key={el}>
+                            <h4 className={estilos.contenedorSeleccionContenidoTitulo} >{el}</h4>
+                            <button className={estilos.delete} onClick={() => {handleDelete(el)}}>x</button>
                         </div>
                     );
                   })}
                 </div>
                 
 
-                <button types="submit">Create Pokemon!</button>
+                <button className={estilos.button} types="submit">Create Pokemon!</button>
 
             </form>
-            <Link to='/Home'><button >Back to Home</button></Link>
+            <Link to='/Home'><button className={estilos.button}>Back to Home</button></Link>
         </div>
     )
 }

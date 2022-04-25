@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import { useDispatch} from 'react-redux' ;
 import { getTypes } from '../actions';
-import styles from '../Estilos/LandingPage.module.css'
+import estilos from '../Estilos/LandingPage.module.css'
 
 export default function LandingPage(){
     const dispatch = useDispatch();
@@ -11,11 +11,11 @@ export default function LandingPage(){
     },[dispatch])
     
     return(
-        <div>
-            <h1 className={styles.titulo}>Let's go Pokemons</h1>
-            <Link to = '/home'>
-                <button className={styles.button}>Let's go</button>
-            </Link>
+        <div className={estilos.LandingPage}>
+            <h1 className={estilos.titulo}>Let's go Pokemons</h1>
+            <div className={estilos.link}><Link to = '/home'>
+                <button className={estilos.button}>Let's go</button>
+            </Link></div>
         </div>
     )
 }

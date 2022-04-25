@@ -59,7 +59,7 @@ export default function Home (){
     return (
         <>
             <div className={estilos.home}>     
-            <h1>Los Pokemone</h1>
+            <h1 className={estilos.titulo}>Pokemons!</h1>
             <NavBar 
                 allTypes={allTypes}
                 handleClick={handleClick}
@@ -93,6 +93,7 @@ export default function Home (){
             </div>:<Loading/>
         }
          </div>
+         <footer className={estilos.henry}><img src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png" alt="Logo Henry" width='150'/></footer>
         </>
     )
 }

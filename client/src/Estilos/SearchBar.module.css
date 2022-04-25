@@ -1,8 +1,15 @@
 .search{
-    width: 250px;
-    height: 30px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border: transparent;
-    
+    margin: 1rem auto ;
+   
+    width: 45%;
 }
+.input{
+    background-color: rgb(58,58,58);
+    color: rgba(254,219,54,1);
+    padding: 1rem;
+    
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1.5rem;
+}   
+ 

@@ -3,15 +3,19 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto; 
     grid-gap: 1rem;
-    margin-left: 0.5%;
-    padding-bottom: 2%;   
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 .home{
-    background: #0075BE;
+    background: linear-gradient(180deg, rgba(254,219,54,1) 0%, rgba(225,182,16,1) 100%);
     min-height: 100vh;
 }
-
+.titulo{
+    font-size: 4.5rem;
+    color: rgb(58, 58, 58);
+    text-transform: capitalize;
+}
 
 
 .sortfilter{
@@ -22,4 +26,9 @@
 
 .sortfilter select option{
     padding: 3%;
+}
+
+.henry{
+    padding: 1rem;
+    
 }
