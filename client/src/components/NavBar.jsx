@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from "./SearchBar";
@@ -30,9 +31,9 @@ export default function NavBar({allTypes, handleOrder, handleAttack, handleFilte
                         <option value="desc">Zz to Aa</option>
                     </select>
                     <select className={estilos.ordenSelect} defaultValue='attack' onChange={e => handleAttack(e)}>
-                        <option value="attack" disabled>Attack</option>
-                        <option value="ascendent">Low Attack</option>
-                        <option value="descendent">Top Attack</option>
+                        <option value="attack" disabled>Ataque</option>
+                        <option value="ascendent">Ataque Bajo</option>
+                        <option value="descendent">Ataque Alto</option>
                     </select>
                 </div>
                 <div>
