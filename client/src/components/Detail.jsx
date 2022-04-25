@@ -50,7 +50,8 @@ export default function Details() {
                         
                             <img src={stats.img} alt='detailsPicture' />
                        
-                        <div className={estilos.contenedorInfo}> 
+                        <div className={estilos.contenedorInfo}>
+                            <button className={estilos.buttondelete} onClick={handleDelete}>❌</button>
                             <div>
                                 <label>Life Points: </label>
                                 {stats.hp}
@@ -83,10 +84,7 @@ export default function Details() {
                             {stats.types?.map((el, i) =>
                                 <p key={i}>{el.name}</p>
                             )}
-                            </div>
-                            {
-                                <button className="delete" onClick={handleDelete}>Delete Pokemon</button>
-                            }    
+                            </div>   
                         </div>
                     </div>
                     </div>}

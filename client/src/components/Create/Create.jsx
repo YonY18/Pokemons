@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { getTypes, postPokemon } from "../../actions/index";
 import {useDispatch, useSelector} from 'react-redux'
 import estilos from '../../Estilos/Create.module.css'
-
+import pika from '../../Imagenes/null.gif'
 
 
 export default function CreatePokemon(){
@@ -62,7 +62,7 @@ export default function CreatePokemon(){
 
     const [input, setInput] = useState({
         name: '',
-        img:'',
+        img: pika,
         types: [],
         hp:0,
         attack:0,
