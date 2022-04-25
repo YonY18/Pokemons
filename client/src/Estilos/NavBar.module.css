@@ -4,7 +4,7 @@
 }
 .label{
     color: #0A285F;
-    padding: 2rem;
+    padding: 1rem;
 }
 .contenedorOrden{
     display: grid;
@@ -37,7 +37,7 @@
 .button{
     background: linear-gradient(180deg, rgba(254,219,54,1) 0%, #D89502 100%);
    border: none;
-   padding: 1rem;
+   padding: 0.5rem;
     border-radius: 0.5rem;
     width: fit-content;
     color: #0A285F;

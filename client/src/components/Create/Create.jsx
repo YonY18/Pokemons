@@ -138,50 +138,50 @@ export default function CreatePokemon(){
         
         <div className={estilos.contenedorGral}>
             
-            <h2 >Crea tu Pokemon!</h2>
+            <h2 >Create your own pokemon!</h2>
            
             <form className={estilos.formulario} onSubmit={event=>handleSubmit(event)}>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Nombre:</label>
+                    <label htmlFor="">Name:</label>
                     <input className={estilos.input} types="text" value={input.name} name='name' placeholder="Enter a name" onChange={handleChange}/>
                     {!error.name ? null : (<span className={estilos.span}>{error.name}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Imagen:</label>
+                    <label htmlFor="">Image:</label>
                     <input  className={estilos.input} types='text' value={input.img} name='img' placeholder="Enter a URL" onChange={handleChange}/>
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Salud:</label>
+                    <label htmlFor="">Hp:</label>
                     <input  className={estilos.input} types='number' value={input.hp} name='hp' placeholder="Enter a value" onChange={handleChange}/>
                     {!error.hp ? null : (<span className={estilos.span}>{error.hp}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Ataque:</label>
+                    <label htmlFor="">Attack:</label>
                     <input  className={estilos.input} types='number' value={input.attack} name='attack' placeholder="Enter a value" onChange={handleChange}/>
                     {!error.attack ? null : (<span className={estilos.span}>{error.attack}</span>) }
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Defensa:</label>
+                    <label htmlFor="">Defense:</label>
                     <input  className={estilos.input} types='number' value={input.defense} name='defense' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.defense ? null : (<span className={estilos.span}>{error.defense}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Velocidad:</label>
+                    <label htmlFor="">Speed:</label>
                     <input  className={estilos.input} types='number' value={input.speed} name='speed' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.speed ? null : (<span className={estilos.span}>{error.speed}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Peso:</label>
+                    <label htmlFor="">Weight:</label>
                     <input  className={estilos.input} types='number' value={input.weight} name='weight' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.weight ? null : (<span className={estilos.span}>{error.weight}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label htmlFor="">Altura:</label>
+                    <label htmlFor="">Height:</label>
                     <input  className={estilos.input} types='number' value={input.height} name='height' placeholder="Enter a value"onChange={handleChange}/>
                     {!error.height ? null : (<span className={estilos.span}>{error.height}</span>)}
                 </div>
                 <div className={estilos.contenedorInputs}>
-                    <label >Tipo:</label>
+                    <label >Type:</label>
                     <select onChange={event=>handleSelect(event)}>
                     {types &&
                         types.map((types) => {

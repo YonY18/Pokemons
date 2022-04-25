@@ -4,7 +4,7 @@
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     align-content:stretch;
-    background-image: url('../Imagenes/pikapika.png');
+    background-image: url('../Imagenes/pikaanoni.png');
     background-repeat: no-repeat;
 }
 .titulo{

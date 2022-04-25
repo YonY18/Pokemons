@@ -40,7 +40,8 @@ function rootReducer (state = initialState, action){
             }
 /////////////////////////////jonathan/////////////////////////////////////////
         case 'ORDER_BY_NAME':
-            let orderArray = action.payload === "asc" ? state.allPokemons.sort(function(a,b){
+            let orderArray = action.payload === "asc" ? 
+            state.allPokemons.sort(function(a,b){
                 if(a.name > b.name) return 1;
                 if(b.name > a.name) return -1;
                     return 0; 
@@ -50,20 +51,37 @@ function rootReducer (state = initialState, action){
                 if(b.name > a.name) return 1;
                     return 0;
                 });
-                return {...state, allPokemons: orderArray}
+
+
+                return {...state, 
+                    allPokemons: orderArray
+                }
  /////////////////////////////jonathan/////////////////////////////////////////              
         case "FILTER_IF_CREATED": 
-        const filtrado = action.payload === 'createdInDb'? state.allPokemons.filter(el => typeof el.id !== 'number') : state.allPokemons.filter(el=> typeof el.id === 'number') ;
+        const filtrado = action.payload === 'createdInDb'? 
+        state.allPokemons.filter(el => typeof el.id !== 'number') : 
+        state.allPokemons.filter(el=> typeof el.id === 'number') ;
+        
+
+        
         return {
             ...state,
             pokemons: action.payload === 'All'? state.allPokemons : filtrado
         }
 /////////////////////////////jonathan/////////////////////////////////////////
         case "FILTER_BY_TYPE":
-            const filtered = action.payload === 'all'? state.allPokemons : state.allPokemons.filter(el => el.types[0].name === action.payload) 
-                return{         
+          /*  const filtered = action.payload === 'all'? 
+            state.allPokemons : 
+            state.allPokemons.filter(el =>console.log(el.types) ) */
+            const filter = action.payload === 'all'? 
+            state.allPokemons : state.allPokemons.filter(c => {
+                let countryAct = c.types.map(el => el.name.toLowerCase());
+                return countryAct.includes(action.payload.toLowerCase()) ? c : null
+            })
+           // console.log(filtered)
+            return{         
                     ...state,
-                    pokemons: filtered,
+                    pokemons: filter,
                 }  
 /////////////////////////////jonathan/////////////////////////////////////////    
         case "ORDER_BY_ATTACK": 
@@ -99,6 +117,11 @@ function rootReducer (state = initialState, action){
                 return {
                     ...state,
                     details: action.payload
+                    }
+/////////////////////////////jonathan/////////////////////////////////////////
+            case "DELETE_POKEMON":
+                return{
+                    ...state
                     }
 /////////////////////////////jonathan/////////////////////////////////////////
             default: 

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from "./SearchBar";
 import { Link } from 'react-router-dom';
 import { filterByName } from "../actions"
 import estilos from "../Estilos/NavBar.module.css"
 
-export default function NavBar({ allTypes, handleOrder, handleAttack, handleFilterCreated, handleFilterType, handleClick }) {
+export default function NavBar({allTypes, handleOrder, handleAttack, handleFilterCreated, handleFilterType, handleClick }) {
     const dispatch = useDispatch()
+    const allPokeTypes = useSelector ((state)=> state.allPokemons)
     const [stateName, setStateName] = useState('');
 
     function handleChange(e) {
@@ -48,8 +49,8 @@ export default function NavBar({ allTypes, handleOrder, handleAttack, handleFilt
                     <select className={estilos.ordenSelect} defaultValue='Types' onChange={e => handleFilterType(e)}>
                         <option value="Types" disabled>Types</option>
                         <option value="all">All Types</option>
-                        {allTypes && allTypes.map((t) => (
-                            <option value={t.name} key={t.name}>{t.name}</option>))}
+                        
+                        {allTypes && allTypes.map((e) => ( <option value={e.name} key={e.name}>{e.name}</option>))}
                     </select>
                 </div>
             </div>

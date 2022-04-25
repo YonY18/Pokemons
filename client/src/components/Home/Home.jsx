@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react' ;
 import { Fragment } from "react";
 import { useDispatch, useSelector } from 'react-redux' ;
-import { getPokemons, orderByName, filterIfCreated, orderByAttack, filterByType} from '../../actions';
+import { getPokemons, orderByName, filterIfCreated, orderByAttack, filterByType, getTypes} from '../../actions';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
 import Paginado from '../Paginado'
@@ -29,6 +29,7 @@ export default function Home (){
 
     useEffect (()=>{
         dispatch(getPokemons());
+        dispatch(getTypes())
     },[dispatch])
 
     function handleClick(e){
@@ -36,21 +37,20 @@ export default function Home (){
         dispatch(getPokemons())
     }
     function handleOrder(e) { 
-        e.preventDefault();
+        e.preventDefault()
         dispatch(orderByName(e.target.value));
         setOrder(`ordered ${e.target.value}`)
     }
     function handleAttack(e) {
-        e.preventDefault();
+        e.preventDefault()
         dispatch(orderByAttack(e.target.value));
         setOrder(`ordered ${e.target.value}`)
     }
     function handleFilterCreated(e) {
-        e.preventDefault()
+       e.preventDefault()
         dispatch(filterIfCreated(e.target.value))
     }
     function handleFilterType(e) { 
-        e.preventDefault()
         dispatch(filterByType(e.target.value))
     }
 
@@ -59,7 +59,7 @@ export default function Home (){
     return (
         <>
             <div className={estilos.home}>     
-            <h1 className={estilos.titulo}>Pokemons!</h1>
+            <h1 className={estilos.titulo}>Los Pokemone</h1>
             <NavBar 
                 allTypes={allTypes}
                 handleClick={handleClick}
@@ -78,7 +78,6 @@ export default function Home (){
         
             <div className={estilos.cards}>
             {currentPokemons?.map((el) =>{
-                console.log(el.types)
                 return(
                     <Fragment key={el.id}>
                         <Link to={"/" + el.id}>

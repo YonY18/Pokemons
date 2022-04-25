@@ -18,6 +18,7 @@ export function getTypes(){
     return async (dispatch) => {
         try{
             let urlTypes = await axios.get('http://localhost:3001/types');
+            
             return dispatch({
                 type: 'GET_TYPES',
                 payload: urlTypes.data
@@ -116,5 +117,12 @@ export function filterByName(payload){
     }
 }
 /////////////////////////////jonathan/////////////////////////////////////////
-
-
+export function deletePokemon(id){
+    return async function(dispatch){
+        await axios.delete('http://localhost:3001/pokemons/' + id)
+        return dispatch({
+            type: 'DELETE_POKEMON',
+        })
+    }
+}
+/////////////////////////////jonathan/////////////////////////////////////////

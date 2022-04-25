@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getIds } from '../actions/index';
+import { getIds, deletePokemon } from '../actions/index';
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import estilos from '../Estilos/Detail.module.css'
@@ -15,6 +15,7 @@ export default function Details() {
     const [stats, setStats] = useState({});
     const details = useSelector(store => store.details);
     const { id } = useParams();
+
 
     const getDetails = () => {
         if (Object.keys(stats).length === 0) dispatch(getIds(id))
@@ -29,7 +30,10 @@ export default function Details() {
         setStats(details);
     }, [details])
 
-
+    function handleDelete(){
+        let isDelete =  window.confirm('Estas seguro?')
+        isDelete && dispatch(deletePokemon(id)) 
+    }
 
 
     return (
@@ -39,42 +43,36 @@ export default function Details() {
             </Link>
             <div key={stats.id} >
                 {Object.keys(stats).length === 0 ? <Loading/> :
-                <div className={estilos.todo}>
-                
-               
-                   
-                            
+                <div className={estilos.todo}>        
                     <h1 className={estilos.titulo}>{stats.name}</h1>
                 
-                     
                     <div className={estilos.contGral}>
-                        
                         
                             <img src={stats.img} alt='detailsPicture' />
                        
                         <div className={estilos.contenedorInfo}> 
                             <div>
-                                <label>Puntos de Salud: </label>
+                                <label>Life Points: </label>
                                 {stats.hp}
                             </div>
                             <div>
-                                <label>Puntos de Ataque: </label>
+                                <label>Attack: </label>
                                 {stats.attack}
                             </div>
                             <div>
-                                <label>Puntos de Defensa: </label>
+                                <label>Defense: </label>
                                 {stats.defense}
                             </div>
                             <div>
-                                <label>Puntos de Velocidad: </label>
+                                <label>Speed: </label>
                                 {stats.speed}
                             </div>
                             <div>
-                                <label>Puntos de Peso: </label>
+                                <label>Height: </label>
                                 {stats.height / 10}m
                             </div>
                             <div>
-                                <label>Puntos de Altura: </label>
+                                <label>Weight: </label>
                                 {stats.weight / 10}kg
                             </div>
                             <div>
@@ -86,6 +84,9 @@ export default function Details() {
                                 <p key={i}>{el.name}</p>
                             )}
                             </div>
+                            {
+                                <button className="delete" onClick={handleDelete}>Delete Pokemon</button>
+                            }    
                         </div>
                     </div>
                     </div>}

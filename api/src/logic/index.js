@@ -34,7 +34,7 @@ const getPokeApi = async (req, res) => {
                 }
             }
         }
-        const urlApi = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40'); //?limit=40
+        const urlApi = await axios.get('https://pokeapi.co/api/v2/pokemon'); //?limit=40
         const bd = await Pokemon.findAll({
             attributes: ['name', 'img', 'attack', 'defense', 'id'],
             include: {
@@ -108,10 +108,10 @@ const getIds = async (req, res) => {
 const getTypes = async (req,res) => {
     try{
         const bdTypes = await Type.findAll({attributes: ['name', 'id']})
+       
         if(bdTypes.length === 0){
             let ress = await axios.get('https://pokeapi.co/api/v2/type');
             var types = ress.data.results.map(el => {return {name: el.name}})
-            
             Type.bulkCreate(types);
            res.json(types);
         }
@@ -143,5 +143,16 @@ const postPokemons = async (req,res) => {
     res.json(newPokemon)
 }
 /////////////////////////////jonathan/////////////////////////////////////////
-module.exports = {getPokeApi, getIds, postPokemons, getTypes}
+const deletePokemons = async (req, res) => {
+    try{
+        const {id} = req.params;
+        res.json(await Pokemon.destroy({
+             where: {id} 
+        }))
+     } catch(error){
+         res.send(error)
+     }
+ }
+/////////////////////////////jonathan/////////////////////////////////////////
+module.exports = {getPokeApi, getIds, postPokemons, getTypes, deletePokemons}
 
