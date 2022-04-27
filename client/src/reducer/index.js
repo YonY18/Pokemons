@@ -75,8 +75,8 @@ function rootReducer (state = initialState, action){
             state.allPokemons.filter(el =>console.log(el.types) ) */
             const filter = action.payload === 'all'? 
             state.allPokemons : state.allPokemons.filter(c => {
-                let countryAct = c.types.map(el => el.name.toLowerCase());
-                return countryAct.includes(action.payload.toLowerCase()) ? c : null
+                let pokemon = c.types.map(el => el.name.toLowerCase());
+                return pokemon.includes(action.payload.toLowerCase()) ? c : null
             })
            // console.log(filtered)
             return{         
