@@ -9,7 +9,7 @@ import Paginado from '../Paginado'
 import Loading from '../Loading';
 import estilos from '../../Estilos/Home.module.css';
 import NavBar from '../NavBar';
-
+import Error from '../Error';
 
 export default function Home (){
     const dispatch = useDispatch()
@@ -80,10 +80,12 @@ export default function Home (){
             {currentPokemons?.map((el) =>{
                 return(
                     <Fragment key={el.id}>
-                        <Link to={"/" + el.id}>
-                            <Card name={el.name} types={el.types} image={el.img} attack={el.attack} id={el.id}/>
-         
-                        </Link>
+                            {
+                                el.error?<Error/>:
+                                <Link to={"/" + el.id}>
+                                <Card name={el.name} types={el.types} image={el.img} attack={el.attack} id={el.id}/>
+                                </Link>
+                            }                        
                     </Fragment>
                     )
                 }) 

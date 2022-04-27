@@ -73,15 +73,20 @@ function rootReducer (state = initialState, action){
           /*  const filtered = action.payload === 'all'? 
             state.allPokemons : 
             state.allPokemons.filter(el =>console.log(el.types) ) */
+            const error = [{
+                id:1,
+                error: 'No hay Pokemons',
+            }]
             const filter = action.payload === 'all'? 
             state.allPokemons : state.allPokemons.filter(c => {
                 let pokemon = c.types.map(el => el.name.toLowerCase());
                 return pokemon.includes(action.payload.toLowerCase()) ? c : null
             })
+            const verific = filter.length>0? filter : error
            // console.log(filtered)
             return{         
                     ...state,
-                    pokemons: filter,
+                    pokemons: verific
                 }  
 /////////////////////////////jonathan/////////////////////////////////////////    
         case "ORDER_BY_ATTACK": 
@@ -99,11 +104,16 @@ function rootReducer (state = initialState, action){
         return {...state, allPokemons: orderAttackArray}
 /////////////////////////////jonathan/////////////////////////////////////////
         case "FILTER_BY_NAME":{
+            const errorName = [{
+                id:1,
+                error: 'No hay Pokemons',
+            }]
             const fil = action.payload === ''?  state.allPokemons : 
-            state.allPokemons.filter(el => el.name.includes(action.payload)? el.name : el.name === action.payload) 
+            state.allPokemons.filter(el => el.name.includes(action.payload)? el.name : el.name === action.payload)
+            const verifi = fil.length>0? fil : errorName
                 return{         
                     ...state,
-                    pokemons: fil,
+                    pokemons: verifi,
                 }
             }
 /////////////////////////////jonathan/////////////////////////////////////////

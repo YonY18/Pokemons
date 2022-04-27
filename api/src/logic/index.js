@@ -34,7 +34,7 @@ const getPokeApi = async (req, res) => {
                 }
             }
         }
-        const urlApi = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40'); //?limit=40
+        const urlApi = await axios.get('https://pokeapi.co/api/v2/pokemon'); //?limit=40
         const bd = await Pokemon.findAll({
             attributes: ['name', 'img', 'attack', 'defense', 'id'],
             include: {
