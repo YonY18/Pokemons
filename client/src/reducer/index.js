@@ -126,7 +126,7 @@ function rootReducer (state = initialState, action){
             case "CLEAN_ID":
                 return {
                     ...state,
-                    details: action.payload
+                    details: {}
                     }
 /////////////////////////////jonathan/////////////////////////////////////////
             case "DELETE_POKEMON":

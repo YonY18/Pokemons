@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getIds, deletePokemon } from '../actions/index';
+import { getIds, deletePokemon, cleanId } from '../actions/index';
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import estilos from '../Estilos/Detail.module.css'
@@ -15,20 +15,25 @@ export default function Details() {
     const [stats, setStats] = useState({});
     const details = useSelector(store => store.details);
     const { id } = useParams();
-
+  
 
     const getDetails = () => {
         if (Object.keys(stats).length === 0) dispatch(getIds(id))
     }
 
     useEffect(() => {
-        getDetails();
-    
+        getDetails(); 
+        return()=>{
+            dispatch(cleanId(id))
+        } 
     },[])
 
     useEffect(() => {
         setStats(details);
     }, [details])
+
+
+
 
     function handleDelete(){
         let isDelete =  window.confirm('Estas seguro?')
