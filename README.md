@@ -31,8 +31,8 @@ La idea general es crear una aplicación en la cual se puedan ver los distintos 
 - [ ] Sequelize - Postgres
 
 #### ScreenShots
-![Captura de pantalla (24)](https://user-images.githubusercontent.com/85300818/177044791-07fb337b-3e19-40ed-b244-e9e65c8e220c.png)
-![Captura de pantalla (25)](https://user-images.githubusercontent.com/85300818/177044809-a4dc560a-932f-487e-8671-957043aec607.png)
-![Captura de pantalla (26)](https://user-images.githubusercontent.com/85300818/177044794-49282d2d-09aa-469e-92a2-a9524a9a6b45.png)
-![Captura de pantalla (27)](https://user-images.githubusercontent.com/85300818/177044797-ab165bb6-f887-42a2-8e90-605b7f8f19a5.png)
-![Captura de pantalla (28)](https://user-images.githubusercontent.com/85300818/177044800-1095edbd-7701-4965-89f4-3967be981dcd.png)
+![Captura de pantalla (29)](https://user-images.githubusercontent.com/85300818/177044871-6b857e75-b8a3-4dd1-8415-c4318fa38ae7.png)
+![Captura de pantalla (31)](https://user-images.githubusercontent.com/85300818/177044885-8cb443b3-f78d-4d03-aa80-edf247d7862d.png)
+![Captura de pantalla (30)](https://user-images.githubusercontent.com/85300818/177044887-3087da70-6cd9-4405-87af-6df35c8e7ae4.png)
+![Captura de pantalla (34)](https://user-images.githubusercontent.com/85300818/177044891-fd9f8aa3-6b3f-4379-98e4-1c44cf8a312b.png)
+![Captura de pantalla (35)](https://user-images.githubusercontent.com/85300818/177044894-7ef2521d-3d03-4dd7-b134-b251f4c9f177.png)
