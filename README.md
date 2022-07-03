@@ -31,4 +31,8 @@ La idea general es crear una aplicación en la cual se puedan ver los distintos 
 - [ ] Sequelize - Postgres
 
 #### ScreenShots
-
+![Captura de pantalla (24)](https://user-images.githubusercontent.com/85300818/177044791-07fb337b-3e19-40ed-b244-e9e65c8e220c.png)
+![Captura de pantalla (25)](https://user-images.githubusercontent.com/85300818/177044809-a4dc560a-932f-487e-8671-957043aec607.png)
+![Captura de pantalla (26)](https://user-images.githubusercontent.com/85300818/177044794-49282d2d-09aa-469e-92a2-a9524a9a6b45.png)
+![Captura de pantalla (27)](https://user-images.githubusercontent.com/85300818/177044797-ab165bb6-f887-42a2-8e90-605b7f8f19a5.png)
+![Captura de pantalla (28)](https://user-images.githubusercontent.com/85300818/177044800-1095edbd-7701-4965-89f4-3967be981dcd.png)
